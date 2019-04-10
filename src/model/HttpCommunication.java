@@ -10,7 +10,7 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
-public class HttpCommunicator {
+public class HttpCommunication {
 	
 	private static final String EMPTY_STRING = " " ;
 	
@@ -24,7 +24,7 @@ public class HttpCommunicator {
 	
 	private CloseableHttpClient client; 
 	
-	public HttpCommunicator(String url) {
+	public HttpCommunication(String url) {
 		this.urlString = url;
 		this.client = HttpClients.createDefault();
 	}

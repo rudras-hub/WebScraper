@@ -3,7 +3,7 @@ package model;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class URLBuilder {
+public class ConstructURL {
 		
 	private static final String PREFIX = "www.";
 	
@@ -15,7 +15,7 @@ public class URLBuilder {
 	
 	private URL url;
 	
-	public URLBuilder(String baseAddress) {
+	public ConstructURL(String baseAddress) {
 		
 		this.siteAddress = baseAddress;
 		BuildString();

@@ -9,7 +9,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WebPageScarpper {
+public class WebReader {
 	
 	private URL url; 
 	
@@ -21,7 +21,7 @@ public class WebPageScarpper {
 	
 	private BufferedReader reader; 
 	
-	public WebPageScarpper(URL inputUrl) {
+	public WebReader(URL inputUrl) {
 		this.url = inputUrl;
 		this.readLines = new ArrayList<String>();
 	}
@@ -32,6 +32,10 @@ public class WebPageScarpper {
 	
 	public String getActionResponse() {
 		return this.actionResponse;
+	}
+	
+	public List<String> getReadLines(){
+		return this.readLines;
 	}
 	
 	public void ReadPage() {
