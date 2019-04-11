@@ -6,55 +6,35 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
-public class WebReader {
-	
-	private URL url; 
-	
-	private String actionResponse; 
-	
-	private List<String> readLines;
+public class ReadPage extends WebAction{
 	
 	private InputStream inputStream;
 	
 	private BufferedReader reader; 
 	
-	public WebReader(URL inputUrl) {
-		this.url = inputUrl;
-		this.readLines = new ArrayList<String>();
+	public ReadPage(URL inputUrl) {
+		super(inputUrl); 
 	}
-	
-	public URL getUrl() {
-		return this.url;
-	}
-	
-	public String getActionResponse() {
-		return this.actionResponse;
-	}
-	
-	public List<String> getReadLines(){
-		return this.readLines;
-	}
-	
-	public void ReadPage() {
+
+	@Override
+	public void execute() {
 		try {
 			inputStream = url.openStream(); 
 			reader = new BufferedReader(new InputStreamReader(inputStream));
 			String line;  
 			
 			while((line = reader.readLine()) != null) {
-				readLines.add(line); 
+				response.add(line); 
 			}
 			
-			actionResponse = "Success!";
+			result = "Success!";
 		}
 		catch (MalformedURLException e) {
-			actionResponse = "Invalid URL";
+			result = "Invalid URL";
 		}
 		catch(IOException e) {
-			actionResponse = "An I/O error has occurred"; 
+			result = "An I/O error has occurred"; 
 		}
 		finally {
 			try {
@@ -67,10 +47,18 @@ public class WebReader {
 				}
 			}
 			catch(IOException e) {
-				actionResponse = "An error occurred when closing the stream";
+				result = "An error occurred when closing the stream";
 			}
 
 		}
+		
+	}
+
+	@Override
+	//TODO: add custom clear
+	public void clearResponse() {
+		response.clear();
+		
 	}
 
 }

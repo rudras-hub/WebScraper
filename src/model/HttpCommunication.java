@@ -1,6 +1,8 @@
 package model;
 
 import java.io.IOException;
+import java.net.URL;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpResponseException;
@@ -10,62 +12,52 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
-public class HttpCommunication {
+public class HttpCommunication extends WebAction {
 	
-	private static final String EMPTY_STRING = " " ;
-	
-	private String httpResponse; 
-	
-	private String actionResponse;
-	
-	private int httpStatus;
+	private int httpStatus = 0;
 	
 	private String urlString;
 	
 	private CloseableHttpClient client; 
 	
-	public HttpCommunication(String url) {
-		this.urlString = url;
+	public HttpCommunication(URL inputUrl) {
+		super(inputUrl);
+		this.urlString = inputUrl.toString();
 		this.client = HttpClients.createDefault();
-	}
-	
-	public String getHttpResponse() {
-		return this.httpResponse;
 	}
 	
 	public int getHttpStatus() {
 		return this.httpStatus;
-	}
-	
-	public String getActionResponse() {
-		return this.actionResponse;
-	}
-	
-	public void executeClient(){
+	}	
+
+	@Override
+	public void execute() {
 		try {
 			HttpGet httpGet = new HttpGet(this.urlString); 
 			HttpResponse rawResponse = client.execute(httpGet);
 			
 			ResponseHandler<String> handler = new BasicResponseHandler();
-			this.httpResponse = handler.handleResponse(rawResponse);
-			this.httpStatus = rawResponse.getStatusLine().getStatusCode();
-			this.actionResponse = "Success!";
+			response.add(handler.handleResponse(rawResponse));
+			httpStatus = rawResponse.getStatusLine().getStatusCode();
+			result = "Success!";
 		}
 		catch(HttpResponseException e) {
-			this.httpStatus = 0;
-			this.httpResponse = EMPTY_STRING;
-			this.actionResponse = "Check if website exists";
+			result = "Check if website exists";
 
 		}
 		catch(ClientProtocolException e) {
-			this.httpStatus = 0;
-			this.httpResponse = EMPTY_STRING; 
-			this.actionResponse = "Http protocol error encountered";
+			result = "Http protocol error encountered";
 		}
 		catch(IOException e) {
-			this.httpStatus = 0;
-			this.httpResponse = EMPTY_STRING;
-			this.actionResponse = "Check internet connection";
+			result = "Check internet connection";
 		}
+		
+	}
+
+	@Override
+	//TODO: add custom clear
+	public void clearResponse() {
+		response.clear();
+		
 	}
 }
