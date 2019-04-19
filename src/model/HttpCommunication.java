@@ -39,6 +39,7 @@ public class HttpCommunication extends WebAction {
 			ResponseHandler<String> handler = new BasicResponseHandler();
 			response.add(handler.handleResponse(rawResponse));
 			httpStatus = rawResponse.getStatusLine().getStatusCode();
+			response.add("HTTP Status Code: " + httpStatus); 
 			result = "Success!";
 		}
 		catch(HttpResponseException e) {
@@ -58,6 +59,7 @@ public class HttpCommunication extends WebAction {
 	//TODO: add custom clear
 	public void clearResponse() {
 		response.clear();
+		result = EMPTY_STRING; 
 		
 	}
 }

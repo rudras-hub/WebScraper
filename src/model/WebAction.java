@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 public abstract class WebAction implements WebActionInterface {
 	
+	protected static final String EMPTY_STRING = ""; 
+	
 	protected URL url; 
 	
 	protected String result; 

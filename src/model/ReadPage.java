@@ -58,6 +58,7 @@ public class ReadPage extends WebAction{
 	//TODO: add custom clear
 	public void clearResponse() {
 		response.clear();
+		result = EMPTY_STRING; 
 		
 	}
 
