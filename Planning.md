@@ -34,7 +34,6 @@
 - MVC Example 3: https://juristr.com/blog/2008/03/logical-separation-with-mvc/
 - GUI Reference: https://docs.oracle.com/javase/tutorial/uiswing/components/index.html
 - Test Swing Code: https://repl.it/languages/java_swing
-- More MVC Reference: https://www.oracle.com/technetwork/articles/javase/mvc-136693.html
 - HTTP Response: https://stackoverflow.com/questions/14024625/how-to-get-httpclient-returning-status-code-and-response-body
 - HTML Parsing: https://stackoverflow.com/questions/238547/how-do-you-programmatically-download-a-webpage-in-java
 - Http Status Codes: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
