@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.beans.PropertyChangeEvent;
@@ -15,8 +16,37 @@ import javax.swing.JTextField;
 
 public class WSView extends JFrame implements View {
 	
+	private JPanel panel;
+	
+	private JTextField addressText;
+	
+	private JTextField resultTextField;
+	
+	private JButton goButton; 
+	
+	private JLabel responseLabel; 
+	
+	private JLabel resultLabel; 
+	
+	private JTextArea responseTextArea;
+	
+	private GridBagConstraints constraints;
+	
 	public WSView() {
-		Initialize();
+		this.panel = new JPanel();
+		this.addressText = new JTextField("Enter website here");
+		this.resultTextField = new JTextField();
+		this.goButton = new JButton("Go");
+		this.responseLabel = new JLabel("Response");
+		this.resultLabel = new JLabel("Result");
+		this.responseTextArea = new JTextArea();
+		this.constraints = new GridBagConstraints();
+		
+		initialize();
+		
+		setSize(700, 700);
+		setContentPane(panel);
+		setVisible(true);
 	}
 
 	/**
@@ -29,68 +59,77 @@ public class WSView extends JFrame implements View {
 		// TODO Auto-generated method stub
 	}
 	
-	public void Initialize() {
-		JPanel panel = new JPanel(); 
+	public void initialize() {
 		panel.setLayout(new GridBagLayout());
-		GridBagConstraints constraints = new GridBagConstraints();
 		panel.setBackground(Color.GRAY);
 		
-		JTextField addressText = new JTextField("Enter website here"); 
-		constraints.gridx = 0;
-		constraints.gridy = 0; 
-		constraints.gridwidth = 2;
-		constraints.weightx = 0.25;
-		constraints.weighty = 0.25;
-		constraints.fill = GridBagConstraints.HORIZONTAL; 
-		panel.add(addressText, constraints); 
+		// Address Text
+		setDimensions(3, 1);
+		constraints.fill = GridBagConstraints.HORIZONTAL;
+		addComponent(addressText, 1, 0);
 		
-		JButton goButton = new JButton("Go");
-		goButton.setBackground(Color.green);
-		goButton.setOpaque(true);
-		constraints.gridx = 2; 
-		constraints.gridy = 0;
-		constraints.gridwidth = 1;
-		constraints.weightx = 0.25;
-		constraints.weighty = 0.25;
-		constraints.fill = GridBagConstraints.CENTER;
-		panel.add(goButton, constraints);
+		// Go button
+		goButton.setForeground(Color.BLUE);
+		setDimensions(1, 1);
+		constraints.fill = GridBagConstraints.NONE;
+		addComponent(goButton, 4, 0);
 		
-		JTextArea responseTextArea = new JTextArea();
+		// Response Label
+		addComponent(responseLabel, 1, 1);
+		
+		// Response Text Area
 		responseTextArea.setEditable(false);
 		JScrollPane responseScrollPane = new JScrollPane(responseTextArea);
-		JLabel responseLabel = new JLabel(" Response ");
-		responseLabel.setLabelFor(responseTextArea);
-		responseLabel.setOpaque(false);
-		constraints.gridx = 0; 
-		constraints.gridy = 1; 
-		constraints.gridwidth = 3; 
-		constraints.gridheight = 3;
-		constraints.weightx = 0.75;
-		constraints.weighty = 0.75;
-		constraints.fill = GridBagConstraints.BOTH;
-		panel.add(responseScrollPane, constraints);
+		constraints.fill = GridBagConstraints.BOTH; 
+		setDimensions(3, 3);
+		setPadding(500, 500);
+		addComponent(responseScrollPane, 1, 2);
 		
-		JTextField resultTextField = new JTextField();
+		// Result Label
+		constraints.fill = GridBagConstraints.NONE;
+		setDimensions(1, 1);
+		setPadding(0,0);
+		addComponent(resultLabel, 1, 6);
+		
+		// Result Text
 		resultTextField.setEditable(false);
-		JLabel resultLabel = new JLabel(" Result ");
-		resultLabel.setLabelFor(resultTextField);
-		resultLabel.setOpaque(false);
-		constraints.gridx = 0; 
-		constraints.gridy = 5;
-		constraints.gridwidth = 3;
-		constraints.gridheight = 1;
-		constraints.weightx = 0;
-		constraints.weighty = 0;
 		constraints.fill = GridBagConstraints.HORIZONTAL;
-		panel.add(resultTextField, constraints);
+		setDimensions(2, 1);
+		addComponent(resultTextField, 2, 6);
 		
-		add(panel);
-		pack();
-		setSize(500, 500);
-		setVisible(true);
+
 		
 	}
-
 	
-
+	private void addComponent(Component component, int positionX, int positionY) {
+		constraints.gridx = positionX;
+		constraints.gridy = positionY;
+		panel.add(component, constraints);	
+	}
+	
+	private void addComponent(Component component, int position, Boolean isX) {
+		if(isX) 
+		{
+			constraints.gridx = position;
+			constraints.gridy = GridBagConstraints.RELATIVE;
+		}
+		else 
+		{
+			constraints.gridx = GridBagConstraints.RELATIVE;
+			constraints.gridy = position;
+		}
+		
+		panel.add(component, constraints);
+		
+	}
+	
+	private void setDimensions(int width,int height) {
+		constraints.gridwidth = width;
+		constraints.gridheight = height;
+	}
+	
+	private void setPadding(int padX, int padY) {
+		constraints.ipadx = padX;
+		constraints.ipady = padY;
+	}
 }
