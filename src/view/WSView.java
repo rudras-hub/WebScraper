@@ -47,26 +47,17 @@ public class WSView extends JFrame implements View {
 		this.responseTextArea = new JTextArea();
 		this.constraints = new GridBagConstraints();
 		
-		initialize();
+		initializeContent();
 		
-		setSize(700, 700);
-		setTitle("WebScraper");
-		setIconImage(new ImageIcon("src/main/resources/scraper.png").getImage());
-		setContentPane(panel);
-		setVisible(true);
+		initializeFrame();
 	}
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	@Override
 	public void OnPropertyChange(PropertyChangeEvent event) {
 		// TODO Auto-generated method stub
 	}
 	
-	public void initialize() {
+	public void initializeContent() {
 		panel.setLayout(new GridBagLayout());
 		panel.setBackground(backgroundColor);
 		
@@ -105,9 +96,14 @@ public class WSView extends JFrame implements View {
 		constraints.fill = GridBagConstraints.HORIZONTAL;
 		setDimensions(2, 1);
 		addComponent(resultTextField, 2, 6);
-		
-
-		
+	}
+	
+	private void initializeFrame() {
+		setSize(700, 700);
+		setTitle("WebScraper");
+		setIconImage(new ImageIcon("src/main/resources/scraper.png").getImage());
+		setContentPane(panel);
+		setVisible(true);
 	}
 	
 	private void addComponent(Component component, int positionX, int positionY) {
