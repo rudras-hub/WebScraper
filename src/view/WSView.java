@@ -6,6 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.beans.PropertyChangeEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,6 +33,10 @@ public class WSView extends JFrame implements View {
 	
 	private GridBagConstraints constraints;
 	
+	private Color backgroundColor = new Color(255, 190, 130);
+	
+	private Color textColor = new Color(0, 80, 155);
+	
 	public WSView() {
 		this.panel = new JPanel();
 		this.addressText = new JTextField("Enter website here");
@@ -45,6 +50,8 @@ public class WSView extends JFrame implements View {
 		initialize();
 		
 		setSize(700, 700);
+		setTitle("WebScraper");
+		setIconImage(new ImageIcon("src/main/resources/scraper.png").getImage());
 		setContentPane(panel);
 		setVisible(true);
 	}
@@ -61,7 +68,7 @@ public class WSView extends JFrame implements View {
 	
 	public void initialize() {
 		panel.setLayout(new GridBagLayout());
-		panel.setBackground(Color.GRAY);
+		panel.setBackground(backgroundColor);
 		
 		// Address Text
 		setDimensions(3, 1);
@@ -69,12 +76,13 @@ public class WSView extends JFrame implements View {
 		addComponent(addressText, 1, 0);
 		
 		// Go button
-		goButton.setForeground(Color.BLUE);
+		goButton.setForeground(textColor);
 		setDimensions(1, 1);
 		constraints.fill = GridBagConstraints.NONE;
 		addComponent(goButton, 4, 0);
 		
 		// Response Label
+		responseLabel.setForeground(textColor);
 		addComponent(responseLabel, 1, 1);
 		
 		// Response Text Area
@@ -86,6 +94,7 @@ public class WSView extends JFrame implements View {
 		addComponent(responseScrollPane, 1, 2);
 		
 		// Result Label
+		resultLabel.setForeground(textColor);
 		constraints.fill = GridBagConstraints.NONE;
 		setDimensions(1, 1);
 		setPadding(0,0);
@@ -105,22 +114,6 @@ public class WSView extends JFrame implements View {
 		constraints.gridx = positionX;
 		constraints.gridy = positionY;
 		panel.add(component, constraints);	
-	}
-	
-	private void addComponent(Component component, int position, Boolean isX) {
-		if(isX) 
-		{
-			constraints.gridx = position;
-			constraints.gridy = GridBagConstraints.RELATIVE;
-		}
-		else 
-		{
-			constraints.gridx = GridBagConstraints.RELATIVE;
-			constraints.gridy = position;
-		}
-		
-		panel.add(component, constraints);
-		
 	}
 	
 	private void setDimensions(int width,int height) {
