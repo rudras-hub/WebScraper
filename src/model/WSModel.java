@@ -6,40 +6,61 @@ import java.util.ArrayList;
 
 public class WSModel extends AbstractModel {
 	
-	private WebAction action; 
+	private AbstractWebAction action; 
 	
-	private String result; 
+	private String actionResult; 
 	
-	private ArrayList<String> response; 
+	private ArrayList<String> actionResponse; 
 	
-	public WSModel(String inputUrl) {
+	private String actionURL;
+	
+	public WSModel() {
 		super(); 
-		setAction(inputUrl); 
 	}
 	
-	public void setResult() {
-		String oldValue = this.result; 
-		this.result = action.getResult();
-		firePropertyChange("result", oldValue, result);
+	public void executeAction() {
+		String oldResult = this.actionResult; 
+		ArrayList<String> oldResponse = this.actionResponse;
+		
+		action.execute();
+		
+		this.actionResult = action.getResult();
+		this.actionResponse = action.getResponse(); 
+		
+		firePropertyChange("actionResult", oldResult, actionResult);
+		firePropertyChange("actionResponse", oldResponse, actionResponse);
 	}
 	
-	public void setResponse() {
-		ArrayList<String> oldValue = this.response; 
-		this.response = action.getResponse(); 
-		firePropertyChange("response", oldValue, response);
+	public String getActionResult() {
+		return action.getResult();
 	}
 	
+	public ArrayList<String> getActionResponse(){
+		return action.getResponse();
+	}
 	
-	private void setAction(String inputUrl) {
-		ConstructURL urlBuilder; 
+	public void setActionResult(String text) {
+		String oldValue = this.actionResult;
+		this.actionResult = text;
+		firePropertyChange("actionResult", oldValue, actionResult);
+	}
+	
+	public void setURL(String inputUrl) {
+		String oldValue = this.actionURL;
+		this.actionURL = inputUrl;
+		ConstructURL urlBuilder;
 		URL url;
 		try {
-			urlBuilder = new ConstructURL(inputUrl); 
+			urlBuilder = new ConstructURL(this.actionURL); 
 			url = urlBuilder.getUrl(); 
 			this.action = new ReadPage(url); 
 		}
 		catch(MalformedURLException e) {
-			this.action = null; 
+			setActionResult("Invalid URL");
+		}
+		finally 
+		{
+			firePropertyChange("actionURL", oldValue, actionURL);
 		}
 	}
 	

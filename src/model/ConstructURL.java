@@ -25,7 +25,8 @@ public class ConstructURL {
 		return this.urlString;
 	}
 	
-	public URL getUrl() throws MalformedURLException {
+	public URL getUrl() throws MalformedURLException
+	{
 		this.url= new URL(this.urlString); 
 		return this.url;
 	}

@@ -3,36 +3,19 @@ package model;
 import java.net.URL;
 import java.util.ArrayList;
 
-public abstract class WebAction implements WebActionInterface {
+public interface WebAction {
 	
-	protected static final String EMPTY_STRING = ""; 
+	URL getUrl(); 
 	
-	protected URL url; 
+	String getResult(); 
 	
-	protected String result; 
+	ArrayList<String> getResponse();
 	
-	protected ArrayList<String> response;
+	void setResult(String resultText);
 	
-	public WebAction(URL inputUrl) {
-		this.url = inputUrl;
-		this.response = new ArrayList<String>();
-		
-	}
+	void execute(); 
 	
-	public URL getUrl() {
-		return this.url;
-	}
+	void clearResponse(); 
 	
-	public String getResult() {
-		return this.result;
-	}
-	
-	public ArrayList<String> getResponse(){
-		return this.response;
-	}
-	
-	public abstract void execute(); 
-	
-	public abstract void clearResponse();
 
 }

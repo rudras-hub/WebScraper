@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class ReadPage extends WebAction{
+public class ReadPage extends AbstractWebAction{
 	
 	private InputStream inputStream;
 	

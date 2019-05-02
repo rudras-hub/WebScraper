@@ -12,7 +12,7 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
-public class HttpCommunication extends WebAction {
+public class HttpCommunication extends AbstractWebAction {
 	
 	private int httpStatus = 0;
 	
