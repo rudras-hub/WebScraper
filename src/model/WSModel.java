@@ -45,7 +45,7 @@ public class WSModel extends AbstractModel {
 		firePropertyChange("actionResult", oldValue, actionResult);
 	}
 	
-	public void setURL(String inputUrl) {
+	public void setActionURL(String inputUrl) {
 		String oldValue = this.actionURL;
 		this.actionURL = inputUrl;
 		ConstructURL urlBuilder;
