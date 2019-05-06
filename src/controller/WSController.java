@@ -13,15 +13,15 @@ public class WSController extends AbstractController {
 	}
 	
 	public void changeURL(String inputUrl) {
-		setModelProperty(SET_URL_METHOD, inputUrl);
+		invokeModelMethod(SET_URL_METHOD, inputUrl);
 	}
 	
 	public void changeResult(String resultText) {
-		setModelProperty(SET_RESULT_METHOD, resultText);
+		invokeModelMethod(SET_RESULT_METHOD, resultText);
 	}
 	
 	public void executeAction() {
-		setModelProperty(EXECUTE_ACTION_METHOD, "");
+		invokeModelMethod(EXECUTE_ACTION_METHOD, null);
 	}
 
 }

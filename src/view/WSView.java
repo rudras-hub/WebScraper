@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.beans.PropertyChangeEvent;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -14,8 +15,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import controller.*;
 
 public class WSView extends JFrame implements View {
+	
+	private final String ACTION_RESULT_PROPERTY = "actionResult";
+	
+	private final String ACTION_RESPONSE_PROPERTY = "actionResponse";
+	
+	private final String ACTION_URL_PROPERTY = "actionURL";
 	
 	private JPanel panel;
 	
@@ -37,7 +45,9 @@ public class WSView extends JFrame implements View {
 	
 	private Color textColor = new Color(0, 80, 155);
 	
-	public WSView() {
+	private WSController controller;
+	
+	public WSView(AbstractController c) {
 		this.panel = new JPanel();
 		this.addressText = new JTextField("Enter website here");
 		this.resultTextField = new JTextField();
@@ -48,13 +58,33 @@ public class WSView extends JFrame implements View {
 		this.constraints = new GridBagConstraints();
 		
 		initializeContent();
-		
 		initializeFrame();
+		
+		this.controller = (WSController)c;
+		goButton.addActionListener(new ExecuteActionListener(controller, addressText.getText()));
 	}
 
 	@Override
 	public void OnPropertyChange(PropertyChangeEvent event) {
-		// TODO Auto-generated method stub
+		if(checkEventProperty(event, this.ACTION_RESULT_PROPERTY)) 
+		{
+			String newValue = event.getNewValue().toString();
+			resultTextField.setText(newValue);
+		}
+		else if(checkEventProperty(event, this.ACTION_RESPONSE_PROPERTY)) 
+		{
+			ArrayList<String> newValue = (ArrayList<String>) event.getNewValue();
+			for(String line : newValue) 
+			{
+				responseTextArea.append(line + "\n");
+			}
+		}
+		else if (checkEventProperty(event, this.ACTION_URL_PROPERTY)) 
+		{
+			String newValue = event.getNewValue().toString();
+			addressText.setText(newValue);			
+		}
+		
 	}
 	
 	public void initializeContent() {
@@ -70,7 +100,7 @@ public class WSView extends JFrame implements View {
 		goButton.setForeground(textColor);
 		setDimensions(1, 1);
 		constraints.fill = GridBagConstraints.NONE;
-		addComponent(goButton, 4, 0);
+		addComponent(goButton, 4, 	0);
 		
 		// Response Label
 		responseLabel.setForeground(textColor);
@@ -120,5 +150,10 @@ public class WSView extends JFrame implements View {
 	private void setPadding(int padX, int padY) {
 		constraints.ipadx = padX;
 		constraints.ipady = padY;
+	}
+	
+	private Boolean checkEventProperty(PropertyChangeEvent event, String propertyName) 
+	{
+		return event.getPropertyName().equals(propertyName);
 	}
 }
