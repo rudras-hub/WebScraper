@@ -48,17 +48,20 @@ public abstract class AbstractController implements PropertyChangeListener {
 			try 
 			{
 				Method method;
-				if(newValue == null) {
-					method = model.getClass().getMethod(methodName);
+				if(newValue == null) 
+				{
+					method = model.getClass()
+							.getMethod(methodName);
 					
+					method.invoke(model);	
 				}
 				else 
 				{
-				method = model.getClass()
-						.getMethod(methodName, new Class[] {newValue.getClass()});
+					method = model.getClass()
+							.getMethod(methodName, new Class[] {newValue.getClass()});
+					
+					method.invoke(model, newValue);
 				}
-				
-				method.invoke(model, newValue);
 				
 			} 
 			catch (NoSuchMethodException e) 

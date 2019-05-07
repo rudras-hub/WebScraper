@@ -49,7 +49,7 @@ public class WSView extends JFrame implements View {
 	
 	public WSView(AbstractController c) {
 		this.panel = new JPanel();
-		this.addressText = new JTextField("Enter website here");
+		this.addressText = new JTextField("www.google.com");
 		this.resultTextField = new JTextField();
 		this.goButton = new JButton("Go");
 		this.responseLabel = new JLabel("Response");
