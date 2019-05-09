@@ -1,23 +1,29 @@
 package view;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.text.JTextComponent;
+
 import controller.*;
 
 public class ExecuteActionListener implements ActionListener {
 	
 	private WSController controller;
 	
-	private String address;
+	private JTextComponent textComponent;
 	
-	public ExecuteActionListener(WSController c, String siteAddress) {
+	public ExecuteActionListener(WSController c, JTextComponent addressComponent) {
 		this.controller = c;
-		this.address = siteAddress;
+		this.textComponent = addressComponent;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		controller.changeURL(address);
+		String newAddress = textComponent.getText();
+		controller.updateAddress(newAddress);
+		controller.clearPage();
 		controller.executeAction();
 		
 	}

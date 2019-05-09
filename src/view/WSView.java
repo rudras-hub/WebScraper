@@ -19,6 +19,11 @@ import controller.*;
 
 public class WSView extends JFrame implements View {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private final String ACTION_RESULT_PROPERTY = "actionResult";
 	
 	private final String ACTION_RESPONSE_PROPERTY = "actionResponse";
@@ -45,9 +50,9 @@ public class WSView extends JFrame implements View {
 	
 	private Color textColor = new Color(0, 80, 155);
 	
-	private WSController controller;
+	private WSController wsController;
 	
-	public WSView(AbstractController c) {
+	public WSView(AbstractController controller) {
 		this.panel = new JPanel();
 		this.addressText = new JTextField("www.google.com");
 		this.resultTextField = new JTextField();
@@ -60,8 +65,7 @@ public class WSView extends JFrame implements View {
 		initializeContent();
 		initializeFrame();
 		
-		this.controller = (WSController)c;
-		goButton.addActionListener(new ExecuteActionListener(controller, addressText.getText()));
+		this.wsController = (WSController)controller;
 	}
 
 	@Override
@@ -73,6 +77,7 @@ public class WSView extends JFrame implements View {
 		}
 		else if(checkEventProperty(event, this.ACTION_RESPONSE_PROPERTY)) 
 		{
+			@SuppressWarnings("unchecked")
 			ArrayList<String> newValue = (ArrayList<String>) event.getNewValue();
 			for(String line : newValue) 
 			{
@@ -101,6 +106,7 @@ public class WSView extends JFrame implements View {
 		setDimensions(1, 1);
 		constraints.fill = GridBagConstraints.NONE;
 		addComponent(goButton, 4, 	0);
+		goButton.addActionListener(new ExecuteActionListener(wsController, this.addressText));
 		
 		// Response Label
 		responseLabel.setForeground(textColor);
