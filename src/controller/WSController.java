@@ -34,9 +34,5 @@ public class WSController extends AbstractController {
 	public void executeAction() {
 		invokeModelMethod(EXECUTE_ACTION_METHOD, null);
 	}
-	
-	public void clearPage() {
-		invokeModelMethod(CLEAR_PAGE_METHOD, null);
-	}
 
 }

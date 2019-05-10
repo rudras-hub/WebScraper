@@ -29,18 +29,7 @@ public class WSModel extends AbstractModel {
 		
 		firePropertyChange("actionResult", oldResult, actionResult);
 		firePropertyChange("actionResponse", oldResponse, actionResponse);
-	}
-	
-	public void clearPage() {
-		String oldResult = this.actionResult; 
-		ArrayList<String> oldResponse = this.actionResponse;
-		
-		this.actionResult = "";
-		this.actionResponse = new ArrayList<String>();
-		
-		firePropertyChange("actionResult", oldResult, actionResult);
-		firePropertyChange("actionResponse", oldResponse, actionResponse);
-	}
+	}	
 	
 	public String getActionResult() {
 		return action.getResult();

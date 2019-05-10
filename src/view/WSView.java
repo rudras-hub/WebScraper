@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 
@@ -19,6 +21,17 @@ import controller.*;
 
 public class WSView extends JFrame implements View {
 	
+	private class GoActionListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String newAddress = addressText.getText();
+			controller.updateAddress(newAddress);
+			clearPage();
+			controller.executeAction();
+		}
+	}
+
 	/**
 	 * 
 	 */
@@ -50,9 +63,9 @@ public class WSView extends JFrame implements View {
 	
 	private Color textColor = new Color(0, 80, 155);
 	
-	private WSController wsController;
+	private WSController controller;
 	
-	public WSView(AbstractController controller) {
+	public WSView(WSController wsController) {
 		this.panel = new JPanel();
 		this.addressText = new JTextField("www.google.com");
 		this.resultTextField = new JTextField();
@@ -61,11 +74,11 @@ public class WSView extends JFrame implements View {
 		this.resultLabel = new JLabel("Result");
 		this.responseTextArea = new JTextArea();
 		this.constraints = new GridBagConstraints();
+		this.controller = wsController;
 		
 		initializeContent();
 		initializeFrame();
 		
-		this.wsController = (WSController)controller;
 	}
 
 	@Override
@@ -106,7 +119,7 @@ public class WSView extends JFrame implements View {
 		setDimensions(1, 1);
 		constraints.fill = GridBagConstraints.NONE;
 		addComponent(goButton, 4, 	0);
-		goButton.addActionListener(new ExecuteActionListener(wsController, this.addressText));
+		goButton.addActionListener(new GoActionListener());
 		
 		// Response Label
 		responseLabel.setForeground(textColor);
@@ -156,6 +169,11 @@ public class WSView extends JFrame implements View {
 	private void setPadding(int padX, int padY) {
 		constraints.ipadx = padX;
 		constraints.ipady = padY;
+	}
+	
+	private void clearPage() {
+		responseTextArea.setText("");
+		resultTextField.setText("");
 	}
 	
 	private Boolean checkEventProperty(PropertyChangeEvent event, String propertyName) 
