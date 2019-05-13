@@ -4,6 +4,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+/**
+ * Model for web scraper application
+ * @author Suchi
+ */
 public class WSModel extends AbstractModel {
 	
 	private AbstractWebAction action; 
@@ -14,10 +18,16 @@ public class WSModel extends AbstractModel {
 	
 	private String actionURL;
 	
+	/**
+	 * Initializes a new web scraper model.
+	 */
 	public WSModel() {
 		super(); 
 	}
 	
+	/**
+	 * Executes a web action and updates properties.
+	 */
 	public void executeAction() {
 		String oldResult = this.actionResult; 
 		ArrayList<String> oldResponse = this.actionResponse;
@@ -31,27 +41,26 @@ public class WSModel extends AbstractModel {
 		firePropertyChange("actionResponse", oldResponse, actionResponse);
 	}	
 	
+	/**
+	 * Gets the result of the web action.
+	 * @return Result the web action.
+	 */
 	public String getActionResult() {
 		return action.getResult();
 	}
 	
+	/**
+	 * Gets the response of the web action.
+	 * @return Response of web action
+	 */
 	public ArrayList<String> getActionResponse(){
 		return action.getResponse();
 	}
 	
-	public void setActionResult(String text) {
-		String oldValue = this.actionResult;
-		this.actionResult = text;
-		firePropertyChange("actionResult", oldValue, actionResult);
-	}
-	
-	public void setActionResponse(ArrayList<String> responseText) 
-	{
-		ArrayList<String> oldValue = this.actionResponse;
-		this.actionResponse = responseText;
-		firePropertyChange("actionResponse", oldValue, actionResponse);
-	}
-	
+	/**
+	 * Sets the URL to perform a web action on.
+	 * @param inputUrl The input URL.
+	 */
 	public void setActionURL(String inputUrl) {
 		String oldValue = this.actionURL;
 		this.actionURL = inputUrl;
@@ -69,6 +78,16 @@ public class WSModel extends AbstractModel {
 		{
 			firePropertyChange("actionURL", oldValue, actionURL);
 		}
+	}
+	
+	/**
+	 * Sets the result of a web action.
+	 * @param text Text to set as the result. 
+	 */
+	private void setActionResult(String text) {
+		String oldValue = this.actionResult;
+		this.actionResult = text;
+		firePropertyChange("actionResult", oldValue, actionResult);
 	}
 	
 
