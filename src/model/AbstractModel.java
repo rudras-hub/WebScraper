@@ -7,7 +7,7 @@ import java.beans.PropertyChangeSupport;
  * Abstract model class.
  * @author Suchi
  */
-public abstract class AbstractModel implements Model {
+abstract class AbstractModel implements Model {
 	
 	private PropertyChangeSupport support; 
 	

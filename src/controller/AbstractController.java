@@ -5,26 +5,25 @@ import java.beans.PropertyChangeListener;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-
-import model.AbstractModel;
+import model.Model;
 import view.View;
 
 public abstract class AbstractController implements PropertyChangeListener {
 	
-	private ArrayList<AbstractModel> registeredModels;
+	private ArrayList<Model> registeredModels;
 	private ArrayList<View> registeredViews; 
 	
 	public AbstractController() {
-		this.registeredModels = new ArrayList<AbstractModel>(); 
+		this.registeredModels = new ArrayList<Model>(); 
 		this.registeredViews = new ArrayList<View>(); 
 	}
 	
-	public void addModel(AbstractModel model) {
+	public void addModel(Model model) {
 		registeredModels.add(model); 
 		model.addListener(this);
 	}
 	
-	public void removeModel(AbstractModel model) {
+	public void removeModel(Model model) {
 		registeredModels.remove(model); 
 		model.removeListener(this);
 	}
@@ -44,7 +43,7 @@ public abstract class AbstractController implements PropertyChangeListener {
 	}
 	
 	protected void invokeModelMethod(String methodName, Object newValue) {
-		for(AbstractModel model : registeredModels) 
+		for(Model model : registeredModels) 
 		{
 			try 
 			{
