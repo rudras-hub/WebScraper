@@ -19,8 +19,18 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import controller.*;
 
+/**
+ * Defines the View for web scraper.
+ * @author Suchi
+ *
+ */
 public class WSView extends JFrame implements View {
 	
+	/**
+	 * Action listener for the Go button.
+	 * @author Suchi
+	 *
+	 */
 	private class GoActionListener implements ActionListener{
 
 		@Override
@@ -65,6 +75,10 @@ public class WSView extends JFrame implements View {
 	
 	private WSController controller;
 	
+	/**
+	 * Initializes the View
+	 * @param wsController
+	 */
 	public WSView(WSController wsController) {
 		this.panel = new JPanel();
 		this.addressText = new JTextField("www.google.com");
@@ -76,7 +90,7 @@ public class WSView extends JFrame implements View {
 		this.constraints = new GridBagConstraints();
 		this.controller = wsController;
 		
-		initializeContent();
+		initializeComponent();
 		initializeFrame();
 		
 	}
@@ -105,7 +119,7 @@ public class WSView extends JFrame implements View {
 		
 	}
 	
-	public void initializeContent() {
+	private void initializeComponent() {
 		panel.setLayout(new GridBagLayout());
 		panel.setBackground(backgroundColor);
 		
