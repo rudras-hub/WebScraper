@@ -6,7 +6,7 @@ import java.beans.PropertyChangeListener;
  * Defines interface for a Model class.
  * @author suchi
  */
-public interface Model {
+interface Model {
 	
 	/**
 	 * Adds a listener to be notified on property changes.

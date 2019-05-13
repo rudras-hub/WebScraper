@@ -64,12 +64,12 @@ public class WSModel extends AbstractModel {
 	public void setActionURL(String inputUrl) {
 		String oldValue = this.actionURL;
 		this.actionURL = inputUrl;
-		ConstructURL urlBuilder;
+		URLBuilder urlBuilder;
 		URL url;
 		try {
-			urlBuilder = new ConstructURL(this.actionURL); 
+			urlBuilder = new URLBuilder(this.actionURL); 
 			url = urlBuilder.getUrl(); 
-			this.action = new ReadPage(url); 
+			this.action = new ExtractSourceAction(url); 
 		}
 		catch(MalformedURLException e) {
 			setActionResult("Invalid URL");

@@ -12,20 +12,34 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
-public class HttpCommunication extends AbstractWebAction {
+/**
+ * Web action to ping a web-site
+ * @author Suchi
+ *
+ */
+class PingSiteAction extends AbstractWebAction {
 	
+	private static final String STATUS_CODE_STRING = "Status Code: ";
 	private int httpStatus = 0;
 	
 	private String urlString;
 	
 	private CloseableHttpClient client; 
 	
-	public HttpCommunication(URL inputUrl) {
+	/**
+	 * Initializes a new instance of this class.
+	 * @param inputUrl URL input
+	 */
+	public PingSiteAction(URL inputUrl) {
 		super(inputUrl);
 		this.urlString = inputUrl.toString();
 		this.client = HttpClients.createDefault();
 	}
 	
+	/**
+	 * Gets the HTTP status code.
+	 * @return The status code.
+	 */
 	public int getHttpStatus() {
 		return this.httpStatus;
 	}	
@@ -39,27 +53,18 @@ public class HttpCommunication extends AbstractWebAction {
 			ResponseHandler<String> handler = new BasicResponseHandler();
 			response.add(handler.handleResponse(rawResponse));
 			httpStatus = rawResponse.getStatusLine().getStatusCode();
-			response.add("HTTP Status Code: " + httpStatus); 
-			result = "Success!";
+			result = "Success!" + STATUS_CODE_STRING + httpStatus;
 		}
 		catch(HttpResponseException e) {
-			result = "Check if website exists";
+			result = "Check if website exists" + STATUS_CODE_STRING + httpStatus;
 
 		}
 		catch(ClientProtocolException e) {
-			result = "Http protocol error encountered";
+			result = "Http protocol error encountered" + STATUS_CODE_STRING + httpStatus;
 		}
 		catch(IOException e) {
-			result = "Check internet connection";
+			result = "Check internet connection" + STATUS_CODE_STRING + httpStatus;
 		}
-		
-	}
-
-	@Override
-	//TODO: add custom clear
-	public void clearResponse() {
-		response.clear();
-		result = EMPTY_STRING; 
 		
 	}
 }

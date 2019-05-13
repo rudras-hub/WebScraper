@@ -7,13 +7,21 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class ReadPage extends AbstractWebAction{
+/**
+ * Web action to extract source HTML of a page.
+ * @author Suchi
+ */
+class ExtractSourceAction extends AbstractWebAction{
 	
 	private InputStream inputStream;
 	
 	private BufferedReader reader; 
 	
-	public ReadPage(URL inputUrl) {
+	/**
+	 * Initializes a new instance of this class
+	 * @param inputUrl URL input
+	 */
+	public ExtractSourceAction(URL inputUrl) {
 		super(inputUrl); 
 	}
 
@@ -53,13 +61,4 @@ public class ReadPage extends AbstractWebAction{
 		}
 		
 	}
-
-	@Override
-	//TODO: add custom clear
-	public void clearResponse() {
-		response.clear();
-		result = EMPTY_STRING; 
-		
-	}
-
 }
