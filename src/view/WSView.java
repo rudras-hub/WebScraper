@@ -8,9 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -46,18 +46,14 @@ public class WSView extends JFrame implements View {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	private final String ACTION_RESULT_PROPERTY = "actionResult";
-	
-	private final String ACTION_RESPONSE_PROPERTY = "actionResponse";
-	
-	private final String ACTION_URL_PROPERTY = "actionURL";
 	
 	private JPanel panel;
 	
 	private JTextField addressText;
 	
 	private JTextField resultTextField;
+	
+	private JComboBox<String> actionComboBox;
 	
 	private JButton goButton; 
 	
@@ -73,6 +69,8 @@ public class WSView extends JFrame implements View {
 	
 	private Color textColor = new Color(0, 80, 155);
 	
+	private String[] actionOptions = {"View Page Source", "Ping Website"};
+	
 	private WSController controller;
 	
 	/**
@@ -83,6 +81,7 @@ public class WSView extends JFrame implements View {
 		this.panel = new JPanel();
 		this.addressText = new JTextField("www.google.com");
 		this.resultTextField = new JTextField();
+		this.actionComboBox = new JComboBox<String>(actionOptions);
 		this.goButton = new JButton("Go");
 		this.responseLabel = new JLabel("Response");
 		this.resultLabel = new JLabel("Result");
@@ -97,12 +96,18 @@ public class WSView extends JFrame implements View {
 
 	@Override
 	public void OnPropertyChange(PropertyChangeEvent event) {
-		if(checkEventProperty(event, this.ACTION_RESULT_PROPERTY)) 
+		final String ACTION_RESULT_PROPERTY = "actionResult";
+		
+		final String ACTION_RESPONSE_PROPERTY = "actionResponse";
+		
+		final String ACTION_URL_PROPERTY = "actionURL";
+		
+		if(checkEventProperty(event, ACTION_RESULT_PROPERTY)) 
 		{
 			String newValue = event.getNewValue().toString();
 			resultTextField.setText(newValue);
 		}
-		else if(checkEventProperty(event, this.ACTION_RESPONSE_PROPERTY)) 
+		else if(checkEventProperty(event, ACTION_RESPONSE_PROPERTY)) 
 		{
 			@SuppressWarnings("unchecked")
 			ArrayList<String> newValue = (ArrayList<String>) event.getNewValue();
@@ -111,7 +116,7 @@ public class WSView extends JFrame implements View {
 				responseTextArea.append(line + "\n");
 			}
 		}
-		else if (checkEventProperty(event, this.ACTION_URL_PROPERTY)) 
+		else if (checkEventProperty(event, ACTION_URL_PROPERTY)) 
 		{
 			String newValue = event.getNewValue().toString();
 			addressText.setText(newValue);			
@@ -128,16 +133,27 @@ public class WSView extends JFrame implements View {
 		constraints.fill = GridBagConstraints.HORIZONTAL;
 		addComponent(addressText, 1, 0);
 		
+		// Action Combo Box
+		actionComboBox.setForeground(textColor);
+		setDimensions(1, 1);
+		setPadding(0, 10);
+		constraints.fill = GridBagConstraints.NONE;
+		addComponent(actionComboBox, 1, 2);
+		
 		// Go button
 		goButton.setForeground(textColor);
 		setDimensions(1, 1);
-		constraints.fill = GridBagConstraints.NONE;
-		addComponent(goButton, 4, 	0);
+		setPadding(0, 0);
+		constraints.fill = GridBagConstraints.EAST;
+		addComponent(goButton, 3, 2);
 		goButton.addActionListener(new GoActionListener());
 		
 		// Response Label
 		responseLabel.setForeground(textColor);
-		addComponent(responseLabel, 1, 1);
+		constraints.fill = GridBagConstraints.NONE;
+		setDimensions(1, 1);
+		setPadding(15,0);
+		addComponent(responseLabel, 0, 6);
 		
 		// Response Text Area
 		responseTextArea.setEditable(false);
@@ -145,24 +161,24 @@ public class WSView extends JFrame implements View {
 		constraints.fill = GridBagConstraints.BOTH; 
 		setDimensions(3, 3);
 		setPadding(500, 500);
-		addComponent(responseScrollPane, 1, 2);
+		addComponent(responseScrollPane, 1, 4);
 		
 		// Result Label
 		resultLabel.setForeground(textColor);
 		constraints.fill = GridBagConstraints.NONE;
 		setDimensions(1, 1);
 		setPadding(0,0);
-		addComponent(resultLabel, 1, 6);
+		addComponent(resultLabel, 0, 8);
 		
 		// Result Text
 		resultTextField.setEditable(false);
 		constraints.fill = GridBagConstraints.HORIZONTAL;
-		setDimensions(2, 1);
-		addComponent(resultTextField, 2, 6);
+		setDimensions(3, 1);
+		addComponent(resultTextField, 1, 8);
 	}
 	
 	private void initializeFrame() {
-		setSize(700, 700);
+		setSize(750, 700);
 		setTitle("WebScraper");
 		setIconImage(new ImageIcon("src/main/resources/scraper.png").getImage());
 		setContentPane(panel);

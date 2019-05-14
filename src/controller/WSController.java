@@ -16,8 +16,6 @@ public class WSController extends AbstractController {
 	
 	private static final String EXECUTE_ACTION_METHOD = "executeAction";
 	
-	private static final String CLEAR_PAGE_METHOD = "clearPage";
-	
 	/**
 	 * Initializes a new instance of WSController.
 	 */

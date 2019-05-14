@@ -8,13 +8,6 @@ import java.net.URL;
  * @author Suchi
  */
 class URLBuilder {
-		
-	private static final String PREFIX = "www.";
-	
-	private static final String SUFFIX = ".com";
-	
-	// TODO: Add this as a control.
-	private static final String PROTOCOL = "https://";
 	
 	private String siteAddress;
 	
@@ -52,6 +45,14 @@ class URLBuilder {
 	}
 	
 	private void buildURLString() {
+		final String PREFIX = "www.";
+		
+		final String SUFFIX = ".com";
+		
+		final String PROTOCOL = "https://";
+		
+		final String PROTOCOL_IDENTIFIER ="://";
+		
 		this.urlString = siteAddress;
 		
 		if(siteAddress.isEmpty())
@@ -69,7 +70,10 @@ class URLBuilder {
 			this.urlString += SUFFIX;
 		}
 		
-		this.urlString = PROTOCOL + this.urlString;
+		if(!siteAddress.contains(PROTOCOL_IDENTIFIER)) 
+		{
+			this.urlString = PROTOCOL + this.urlString;
+		}
 	}
 
 
