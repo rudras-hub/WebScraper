@@ -76,27 +76,36 @@ public abstract class AbstractController implements PropertyChangeListener {
 	/**
 	 * Invokes a method on a registered model using reflection.
 	 * @param methodName Name of the method to invoke.
-	 * @param methodParameter Parameters of the method being invoked.
+	 * @param methodParameters Parameters of the method being invoked.
 	 */
-	protected void invokeModelMethod(String methodName, Object methodParameter) {
+	protected void invokeModelMethod(String methodName, Object[] methodParameters) {
 		for(Model model : registeredModels) 
 		{
 			try 
 			{
 				Method method;
-				if(methodParameter == null) 
+				if(methodParameters == null) 
 				{
 					method = model.getClass()
 							.getMethod(methodName);
 					
 					method.invoke(model);	
 				}
-				else 
+				
+				if(methodParameters.length == 1) 
 				{
 					method = model.getClass()
-							.getMethod(methodName, new Class[] {methodParameter.getClass()});
-					
-					method.invoke(model, methodParameter);
+						.getMethod(methodName, new Class[] {methodParameters[0].getClass()});
+				
+					method.invoke(model, methodParameters[0]);
+				}
+				
+				if(methodParameters.length == 2) 
+				{
+					method = model.getClass()
+						.getMethod(methodName, new Class[] {methodParameters[0].getClass(), methodParameters[1].getClass()});
+				
+					method.invoke(model, methodParameters[0], methodParameters[1]);
 				}
 				
 			} 

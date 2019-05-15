@@ -36,7 +36,8 @@ public class WSView extends JFrame implements View {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String newAddress = addressText.getText();
-			controller.updateAddress(newAddress);
+			String newActionName = (String) actionComboBox.getSelectedItem();
+			controller.updateAction(newActionName, newAddress);
 			clearPage();
 			controller.executeAction();
 		}

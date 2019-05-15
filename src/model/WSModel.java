@@ -10,6 +10,27 @@ import java.util.ArrayList;
  */
 public class WSModel extends AbstractModel {
 	
+	private static class WebActionFactory {
+		
+		public static AbstractWebAction createAction(String actionName, URL url) {
+			
+			WebActionType parsedActionName = WebActionType.
+					valueOf(actionName.replace(" ", "_"));
+			
+			switch(parsedActionName) {
+			
+			case View_Page_Source:
+				return new ExtractSourceAction(url);
+			case Ping_Website:
+				return new PingSiteAction(url);
+			default:
+				return null;
+			}
+			
+		}
+
+	}
+
 	private AbstractWebAction action; 
 	
 	private String actionResult; 
@@ -61,7 +82,7 @@ public class WSModel extends AbstractModel {
 	 * Sets the URL to perform a web action on.
 	 * @param inputUrl The input URL.
 	 */
-	public void setActionURL(String inputUrl) {
+	public void setAction(String actionName, String inputUrl) {
 		String oldValue = this.actionURL;
 		this.actionURL = inputUrl;
 		URLBuilder urlBuilder;
@@ -69,7 +90,7 @@ public class WSModel extends AbstractModel {
 		try {
 			urlBuilder = new URLBuilder(this.actionURL); 
 			url = urlBuilder.getUrl(); 
-			this.action = new ExtractSourceAction(url); 
+			this.action = WebActionFactory.createAction(actionName, url);
 		}
 		catch(MalformedURLException e) {
 			setActionResult("Invalid URL");

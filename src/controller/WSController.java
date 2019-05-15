@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class WSController extends AbstractController {
 	
-	private static final String SET_URL_METHOD = "setActionURL";
+	private static final String SET_ACTION_METHOD = "setAction";
 	
 	private static final String SET_RESULT_METHOD = "setActionResult";
 	
@@ -25,11 +25,12 @@ public class WSController extends AbstractController {
 	
 	/**
 	 * Updates the address for a web action. 
+	 * @param actionName Name of the web action.
 	 * @param newUrl The updated URL
 	 * @see AbstractWebAction
 	 */
-	public void updateAddress(String newUrl) {
-		invokeModelMethod(SET_URL_METHOD, newUrl);
+	public void updateAction(String actionName, String newUrl) {
+		invokeModelMethod(SET_ACTION_METHOD, new String[] {actionName, newUrl});
 	}
 	
 	/**
@@ -38,7 +39,7 @@ public class WSController extends AbstractController {
 	 * @see AbstractWebAction
 	 */
 	public void updateResult(String newResultText) {
-		invokeModelMethod(SET_RESULT_METHOD, newResultText);
+		invokeModelMethod(SET_RESULT_METHOD, new String[]{newResultText});
 	}
 	
 	/**
@@ -48,7 +49,7 @@ public class WSController extends AbstractController {
 	 */
 	public void updateResponse(ArrayList<String> newResponse) 
 	{
-		invokeModelMethod(SET_RESPONSE_METHOD, newResponse);
+		invokeModelMethod(SET_RESPONSE_METHOD, new Object[] {newResponse});
 	}
 	
 	/**
