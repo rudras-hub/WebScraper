@@ -84,7 +84,8 @@ public abstract class AbstractController implements PropertyChangeListener {
 			try 
 			{
 				Method method;
-				if(methodParameters == null) 
+				int numberOfParameters = methodParameters.length;
+				if(numberOfParameters == 0) 
 				{
 					method = model.getClass()
 							.getMethod(methodName);
@@ -92,7 +93,7 @@ public abstract class AbstractController implements PropertyChangeListener {
 					method.invoke(model);	
 				}
 				
-				if(methodParameters.length == 1) 
+				else if(numberOfParameters == 1) 
 				{
 					method = model.getClass()
 						.getMethod(methodName, new Class[] {methodParameters[0].getClass()});
@@ -100,7 +101,7 @@ public abstract class AbstractController implements PropertyChangeListener {
 					method.invoke(model, methodParameters[0]);
 				}
 				
-				if(methodParameters.length == 2) 
+				else if(numberOfParameters == 2) 
 				{
 					method = model.getClass()
 						.getMethod(methodName, new Class[] {methodParameters[0].getClass(), methodParameters[1].getClass()});

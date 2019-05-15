@@ -56,7 +56,7 @@ public class WSController extends AbstractController {
 	 * Executes a web action
 	 */
 	public void executeAction() {
-		invokeModelMethod(EXECUTE_ACTION_METHOD, null);
+		invokeModelMethod(EXECUTE_ACTION_METHOD, new Object[] {});
 	}
 
 }
