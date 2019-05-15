@@ -2,7 +2,6 @@ package model;
 
 import java.io.IOException;
 import java.net.URL;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpResponseException;
@@ -53,7 +52,7 @@ class PingSiteAction extends AbstractWebAction {
 			ResponseHandler<String> handler = new BasicResponseHandler();
 			response.add(handler.handleResponse(rawResponse));
 			httpStatus = rawResponse.getStatusLine().getStatusCode();
-			result = "Success!" + STATUS_CODE_STRING + httpStatus;
+			result = "Success! " + STATUS_CODE_STRING + httpStatus;
 		}
 		catch(HttpResponseException e) {
 			result = "Check if website exists" + STATUS_CODE_STRING + httpStatus;
