@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 /**
  * Abstract web action class.
- * @author Suchi
+ * @author suchi
  */
 public abstract class AbstractWebAction implements WebAction {
 	

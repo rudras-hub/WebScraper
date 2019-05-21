@@ -13,7 +13,7 @@ import org.apache.http.impl.client.HttpClients;
 
 /**
  * Web action to ping a web-site
- * @author Suchi
+ * @author suchi
  *
  */
 class ExtractSourceFromClient extends AbstractWebAction {

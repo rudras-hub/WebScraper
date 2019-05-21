@@ -10,7 +10,7 @@ import view.View;
 
 /**
  * Abstract controller class.
- * @author Suchi
+ * @author suchi
  */
 public abstract class AbstractController implements PropertyChangeListener {
 	

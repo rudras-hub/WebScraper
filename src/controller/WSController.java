@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Controller  class for web-scraper
- * @author Suchi
+ * @author suchi
  */
 public class WSController extends AbstractController {
 	

@@ -20,14 +20,14 @@ import controller.*;
 
 /**
  * Defines the View for web scraper.
- * @author Suchi
+ * @author suchi
  *
  */
 public class WSView extends JFrame implements View {
 	
 	/**
 	 * Action listener for the Go button.
-	 * @author Suchi
+	 * @author suchi
 	 *
 	 */
 	private class GoActionListener implements ActionListener{

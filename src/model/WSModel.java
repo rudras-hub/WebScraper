@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 /**
  * Model for web scraper application
- * @author Suchi
+ * @author suchi
  */
 public class WSModel extends AbstractModel {
 

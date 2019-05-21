@@ -4,7 +4,7 @@ import java.beans.PropertyChangeEvent;
 
 /**
  * Defines interface for a view class
- * @author Suchi
+ * @author suchi
  *
  */
 public interface View {

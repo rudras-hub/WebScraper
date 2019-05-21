@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 /**
  * Web action interface.
- * @author Suchi
+ * @author suchi
  */
 interface WebAction {
 	

@@ -5,7 +5,7 @@ import java.net.URL;
 
 /**
  * Builds URL from string input.
- * @author Suchi
+ * @author suchi
  */
 class URLBuilder {
 	
