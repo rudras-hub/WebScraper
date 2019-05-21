@@ -28,7 +28,7 @@ public abstract class AbstractController implements PropertyChangeListener {
 	/**
 	 * Adds a model to register itself as a listener
 	 * to get notifications of the model class. 
-	 * @param model
+	 * @param model Model to add
 	 */
 	public void addModel(Model model) {
 		registeredModels.add(model); 
@@ -38,7 +38,7 @@ public abstract class AbstractController implements PropertyChangeListener {
 	/**
 	 * Removes itself as a listener of the model class. 
 	 * No longer receives notifications from the model class.
-	 * @param model
+	 * @param model Model to remove
 	 */
 	public void removeModel(Model model) {
 		registeredModels.remove(model); 
