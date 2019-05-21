@@ -11,7 +11,7 @@ import java.net.URL;
  * Web action to extract source HTML of a page.
  * @author Suchi
  */
-class ExtractSourceAction extends AbstractWebAction{
+class ExtractSourceFromUrlStream extends AbstractWebAction{
 	
 	private InputStream inputStream;
 	
@@ -21,7 +21,7 @@ class ExtractSourceAction extends AbstractWebAction{
 	 * Initializes a new instance of this class
 	 * @param inputUrl URL input
 	 */
-	public ExtractSourceAction(URL inputUrl) {
+	public ExtractSourceFromUrlStream(URL inputUrl) {
 		super(inputUrl); 
 	}
 

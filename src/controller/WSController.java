@@ -29,8 +29,8 @@ public class WSController extends AbstractController {
 	 * @param newUrl The updated URL
 	 * @see AbstractWebAction
 	 */
-	public void updateAction(String actionName, String newUrl) {
-		invokeModelMethod(SET_ACTION_METHOD, new String[] {actionName, newUrl});
+	public void updateAction(String newUrl) {
+		invokeModelMethod(SET_ACTION_METHOD, new String[] {newUrl});
 	}
 	
 	/**

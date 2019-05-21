@@ -16,7 +16,7 @@ import org.apache.http.impl.client.HttpClients;
  * @author Suchi
  *
  */
-class PingSiteAction extends AbstractWebAction {
+class ExtractSourceFromClient extends AbstractWebAction {
 	
 	private static final String STATUS_CODE_STRING = "Status Code: ";
 	private int httpStatus = 0;
@@ -29,7 +29,7 @@ class PingSiteAction extends AbstractWebAction {
 	 * Initializes a new instance of this class.
 	 * @param inputUrl URL input
 	 */
-	public PingSiteAction(URL inputUrl) {
+	public ExtractSourceFromClient(URL inputUrl) {
 		super(inputUrl);
 		this.urlString = inputUrl.toString();
 		this.client = HttpClients.createDefault();
@@ -52,7 +52,7 @@ class PingSiteAction extends AbstractWebAction {
 			ResponseHandler<String> handler = new BasicResponseHandler();
 			response.add(handler.handleResponse(rawResponse));
 			httpStatus = rawResponse.getStatusLine().getStatusCode();
-			result = "Success! " + STATUS_CODE_STRING + httpStatus;
+			result = STATUS_CODE_STRING + httpStatus;
 		}
 		catch(HttpResponseException e) {
 			result = "Check if website exists" + STATUS_CODE_STRING + httpStatus;

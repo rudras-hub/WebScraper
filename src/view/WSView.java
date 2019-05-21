@@ -10,7 +10,6 @@ import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -36,8 +35,7 @@ public class WSView extends JFrame implements View {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String newAddress = addressText.getText();
-			String newActionName = (String) actionComboBox.getSelectedItem();
-			controller.updateAction(newActionName, newAddress);
+			controller.updateAction(newAddress);
 			clearPage();
 			controller.executeAction();
 		}
@@ -54,8 +52,6 @@ public class WSView extends JFrame implements View {
 	
 	private JTextField resultTextField;
 	
-	private JComboBox<String> actionComboBox;
-	
 	private JButton goButton; 
 	
 	private JLabel responseLabel; 
@@ -65,12 +61,6 @@ public class WSView extends JFrame implements View {
 	private JTextArea responseTextArea;
 	
 	private GridBagConstraints constraints;
-	
-	private Color backgroundColor = new Color(255, 190, 130);
-	
-	private Color textColor = new Color(0, 80, 155);
-	
-	private String[] actionOptions = {"View Page Source", "Ping Website"};
 	
 	private WSController controller;
 	
@@ -82,7 +72,6 @@ public class WSView extends JFrame implements View {
 		this.panel = new JPanel();
 		this.addressText = new JTextField("www.google.com");
 		this.resultTextField = new JTextField();
-		this.actionComboBox = new JComboBox<String>(actionOptions);
 		this.goButton = new JButton("Go");
 		this.responseLabel = new JLabel("Response");
 		this.resultLabel = new JLabel("Result");
@@ -126,6 +115,9 @@ public class WSView extends JFrame implements View {
 	}
 	
 	private void initializeComponent() {
+		Color backgroundColor = new Color(24, 98, 163); // 
+		Color textColor = new Color(255, 165, 0);
+		
 		panel.setLayout(new GridBagLayout());
 		panel.setBackground(backgroundColor);
 		
@@ -134,27 +126,17 @@ public class WSView extends JFrame implements View {
 		constraints.fill = GridBagConstraints.HORIZONTAL;
 		addComponent(addressText, 1, 0);
 		
-		// Action Combo Box
-		actionComboBox.setForeground(textColor);
-		setDimensions(1, 1);
-		setPadding(0, 10);
-		constraints.fill = GridBagConstraints.NONE;
-		addComponent(actionComboBox, 1, 2);
-		
 		// Go button
 		goButton.setForeground(textColor);
 		setDimensions(1, 1);
-		setPadding(0, 0);
-		constraints.fill = GridBagConstraints.EAST;
-		addComponent(goButton, 3, 2);
+		constraints.fill = GridBagConstraints.NONE;
+		addComponent(goButton, 4, 0);
 		goButton.addActionListener(new GoActionListener());
 		
 		// Response Label
 		responseLabel.setForeground(textColor);
-		constraints.fill = GridBagConstraints.NONE;
-		setDimensions(1, 1);
-		setPadding(15,0);
-		addComponent(responseLabel, 0, 6);
+		setPadding(10,0);
+		addComponent(responseLabel, 0, 4);
 		
 		// Response Text Area
 		responseTextArea.setEditable(false);
@@ -162,24 +144,24 @@ public class WSView extends JFrame implements View {
 		constraints.fill = GridBagConstraints.BOTH; 
 		setDimensions(3, 3);
 		setPadding(500, 500);
-		addComponent(responseScrollPane, 1, 4);
+		addComponent(responseScrollPane, 1, 2);
 		
 		// Result Label
 		resultLabel.setForeground(textColor);
 		constraints.fill = GridBagConstraints.NONE;
 		setDimensions(1, 1);
 		setPadding(0,0);
-		addComponent(resultLabel, 0, 8);
+		addComponent(resultLabel, 0, 6);
 		
 		// Result Text
 		resultTextField.setEditable(false);
 		constraints.fill = GridBagConstraints.HORIZONTAL;
 		setDimensions(3, 1);
-		addComponent(resultTextField, 1, 8);
+		addComponent(resultTextField, 1, 6);
 	}
 	
 	private void initializeFrame() {
-		setSize(750, 700);
+		setSize(700, 700);
 		setTitle("WebScraper");
 		setIconImage(new ImageIcon("src/main/resources/scraper.png").getImage());
 		setContentPane(panel);
