@@ -163,7 +163,7 @@ public class WSView extends JFrame implements View {
 	private void initializeFrame() {
 		setSize(700, 700);
 		setTitle("WebScraper");
-		setIconImage(new ImageIcon("src/main/resources/scraper.png").getImage());
+		setIconImage(new ImageIcon("scraper.jpg").getImage());
 		setContentPane(panel);
 		setVisible(true);
 	}
