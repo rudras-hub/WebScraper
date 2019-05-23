@@ -66,7 +66,7 @@ public class WSView extends JFrame implements View {
 	
 	/**
 	 * Initializes the View
-	 * @param wsController
+	 * @param wsController Controller reference.
 	 */
 	public WSView(WSController wsController) {
 		this.panel = new JPanel();

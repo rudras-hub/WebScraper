@@ -17,7 +17,6 @@ public interface Model {
 	/**
 	 * Removes an existing listener.
 	 * @param listener is no longer notified of property changes, once removed. 
-	 * @see PropertyChangeListener.
 	 */
 	public void removeListener(PropertyChangeListener listener);
 	

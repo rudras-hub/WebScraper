@@ -26,7 +26,7 @@ public class WSController extends AbstractController {
 	/**
 	 * Updates the address for a web action. 
 	 * @param newUrl The updated URL
-	 * @see main.AbstractWebAction
+	 * @see model.AbstractWebAction
 	 */
 	public void updateAction(String newUrl) {
 		invokeModelMethod(SET_ACTION_METHOD, new String[] {newUrl});
@@ -35,7 +35,7 @@ public class WSController extends AbstractController {
 	/**
 	 * Updates the result of a web action
 	 * @param newResultText The updated result text.
-	 * @see main.AbstractWebAction
+	 * @see model.AbstractWebAction
 	 */
 	public void updateResult(String newResultText) {
 		invokeModelMethod(SET_RESULT_METHOD, new String[]{newResultText});
@@ -44,7 +44,7 @@ public class WSController extends AbstractController {
 	/**
 	 * Updates response of a web action
 	 * @param newResponse The updated response.
-	 * @see main.AbstractWebAction
+	 * @see model.AbstractWebAction
 	 */
 	public void updateResponse(ArrayList<String> newResponse) 
 	{
