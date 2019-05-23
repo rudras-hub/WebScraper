@@ -117,6 +117,7 @@ public class WSView extends JFrame implements View {
 	private void initializeComponent() {
 		Color backgroundColor = new Color(24, 98, 163); // 
 		Color textColor = new Color(255, 165, 0);
+		Color goButtonTextColor = Color.white;
 		
 		panel.setLayout(new GridBagLayout());
 		panel.setBackground(backgroundColor);
@@ -127,11 +128,12 @@ public class WSView extends JFrame implements View {
 		addComponent(addressText, 1, 0);
 		
 		// Go button
-		goButton.setForeground(textColor);
+		goButton.setForeground(goButtonTextColor);
 		setDimensions(1, 1);
 		constraints.fill = GridBagConstraints.NONE;
 		addComponent(goButton, 4, 0);
 		goButton.addActionListener(new GoActionListener());
+		getRootPane().setDefaultButton(goButton);
 		
 		// Response Label
 		responseLabel.setForeground(textColor);
