@@ -1,7 +1,7 @@
 # WebScraper 
 
 ## What does it do? 
-Gets the HTML page source for website.
+Gets the HTML page source of websites.
 
 ## How to get started?
 Find the runnable jar [here](https://github.com/rudras-hub/WebScraper/blob/master/dist/WebScraper.jar)
